@@ -2,6 +2,10 @@
 
 A themed task management application with gamification features, powered by Next.js and Firebase.
 
+## Deployed Version
+
+Check out the live application, deployed on Vercel!
+
 ## Features
 
 - **Cyberpunk Theme**: Immersive UI with cyberpunk aesthetics
