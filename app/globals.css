@@ -1,0 +1,234 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
+
+    --muted: 223 47% 11%;
+    --muted-foreground: 215.4 16.3% 56.9%;
+
+    --accent: 216 34% 17%;
+    --accent-foreground: 210 40% 98%;
+
+    --popover: 224 71% 4%;
+    --popover-foreground: 215 20.2% 65.1%;
+
+    --border: 216 34% 17%;
+    --input: 216 34% 17%;
+
+    --card: 224 71% 4%;
+    --card-foreground: 213 31% 91%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 1.2%;
+
+    --secondary: 222.2 47.4% 11.2%;
+    --secondary-foreground: 210 40% 98%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --ring: 216 34% 17%;
+
+    --radius: 0.5rem;
+
+    /* Custom colors */
+    --neon-blue: 195 100% 60%;
+    --neon-blue-dark: 210 100% 50%;
+    --neon-blue-light: 180 100% 60%;
+    --dark-blue: 220 70% 20%;
+    --neon-grey: 220 20% 70%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    background-image: radial-gradient(circle at 25% 10%, hsl(var(--neon-blue) / 0.05), transparent 20%),
+      radial-gradient(circle at 75% 30%, hsl(var(--neon-purple) / 0.05), transparent 20%),
+      radial-gradient(circle at 50% 80%, hsl(var(--neon-green) / 0.05), transparent 20%);
+  }
+}
+
+@layer components {
+  .cyber-border {
+    position: relative;
+    border: 1px solid transparent;
+    border-radius: 0.5rem;
+    background-clip: padding-box;
+    background-color: hsl(var(--muted));
+    overflow: hidden;
+  }
+
+  .cyber-border::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    margin: -1px;
+    border-radius: inherit;
+    background: linear-gradient(120deg, hsl(var(--neon-blue)), hsl(var(--neon-purple)), hsl(var(--neon-blue)));
+  }
+
+  .cyber-border-green::before {
+    background: linear-gradient(120deg, hsl(var(--neon-green)), hsl(var(--neon-blue)), hsl(var(--neon-green)));
+  }
+
+  .cyber-border-red::before {
+    background: linear-gradient(120deg, hsl(var(--neon-red)), hsl(var(--neon-orange)), hsl(var(--neon-red)));
+  }
+
+  .cyber-panel {
+    position: relative;
+    border-radius: 0.5rem;
+    background-color: hsl(var(--muted));
+    box-shadow: 0 0 0 1px hsl(var(--neon-blue) / 0.2), 0 0 15px hsl(var(--neon-blue) / 0.15), inset 0 0 5px
+      hsl(var(--neon-blue) / 0.05);
+  }
+
+  .cyber-panel-green {
+    box-shadow: 0 0 0 1px hsl(var(--neon-green) / 0.2), 0 0 15px hsl(var(--neon-green) / 0.15), inset 0 0 5px
+      hsl(var(--neon-green) / 0.05);
+  }
+
+  .cyber-panel-red {
+    box-shadow: 0 0 0 1px hsl(var(--neon-red) / 0.2), 0 0 15px hsl(var(--neon-red) / 0.15), inset 0 0 5px
+      hsl(var(--neon-red) / 0.05);
+  }
+
+  .cyber-text {
+    text-shadow: 0 0 5px currentColor;
+  }
+
+  .scanner-line {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, hsl(var(--neon-blue)), transparent);
+    animation: scan 4s infinite;
+  }
+
+  @keyframes scan {
+    0% {
+      top: 0%;
+      opacity: 0;
+    }
+    5% {
+      opacity: 0.8;
+    }
+    50% {
+      top: 100%;
+      opacity: 0.8;
+    }
+    55% {
+      opacity: 0;
+    }
+    100% {
+      top: 0%;
+      opacity: 0;
+    }
+  }
+
+  .pulse {
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 hsl(var(--neon-blue) / 0.7);
+    }
+    70% {
+      box-shadow: 0 0 0 10px hsl(var(--neon-blue) / 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 hsl(var(--neon-blue) / 0);
+    }
+  }
+
+  .glitch {
+    position: relative;
+  }
+
+  .glitch::before,
+  .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .glitch::before {
+    left: 2px;
+    text-shadow: -1px 0 hsl(var(--neon-blue));
+    animation: glitch-1 2s infinite linear alternate-reverse;
+  }
+
+  .glitch::after {
+    left: -2px;
+    text-shadow: 1px 0 hsl(var(--neon-purple));
+    animation: glitch-2 3s infinite linear alternate-reverse;
+  }
+
+  @keyframes glitch-1 {
+    0%,
+    80%,
+    100% {
+      clip-path: inset(50% 0 30% 0);
+      transform: translate(0);
+    }
+    20% {
+      clip-path: inset(20% 0 60% 0);
+      transform: translate(-1px, 1px);
+    }
+    40% {
+      clip-path: inset(40% 0 40% 0);
+      transform: translate(1px, -1px);
+    }
+    60% {
+      clip-path: inset(10% 0 70% 0);
+      transform: translate(-1px, 1px);
+    }
+  }
+
+  @keyframes glitch-2 {
+    0%,
+    80%,
+    100% {
+      clip-path: inset(30% 0 50% 0);
+      transform: translate(0);
+    }
+    20% {
+      clip-path: inset(60% 0 20% 0);
+      transform: translate(1px, -1px);
+    }
+    40% {
+      clip-path: inset(40% 0 40% 0);
+      transform: translate(-1px, 1px);
+    }
+    60% {
+      clip-path: inset(70% 0 10% 0);
+      transform: translate(1px, -1px);
+    }
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
+  }
+
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+}
